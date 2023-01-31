@@ -10,8 +10,6 @@ import java.util.List;
 
 public class HouseTypesListImpl implements HouseTypesList {
 
-    // buraya tüm ev tiplerini getirecek bir metot yazılacak
-
     @Override
     public List<House> getHouseList() {
         House h1 = new House(BigDecimal.valueOf(100),3,1, 200);
