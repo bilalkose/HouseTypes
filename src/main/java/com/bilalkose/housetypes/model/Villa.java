@@ -45,4 +45,13 @@ public class Villa {
     public void setSquareMeters(double squareMeters) {
         this.squareMeters = squareMeters;
     }
+
+    @Override
+    public String toString() {
+        return "House Type: " + "Villa. "
+                + "Number of Rooms: " + this.numberOfRooms
+                + " Number of Halls: " + this.numberOfHalls
+                + " Price: " + this.price
+                + " Square Meters: " + this.squareMeters;
+    }
 }

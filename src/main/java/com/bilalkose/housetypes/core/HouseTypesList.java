@@ -8,9 +8,7 @@ import java.util.List;
 
 public interface HouseTypesList {
     List<House> getHouseList();
-
     List<Villa> getVillaList();
-
     List<SummerHouse> getSummerHouseList();
 
 }

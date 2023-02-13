@@ -8,22 +8,29 @@ import main.java.com.bilalkose.housetypes.model.Villa;
 import main.java.com.bilalkose.housetypes.service.HouseTypeService;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
+import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
 public class HouseTypeServiceImpl implements HouseTypeService {
     private HouseTypesList houseTypesList;
     private static BigDecimal allTypeHousesPriceCount = BigDecimal.valueOf(0);
     private static DoubleStream.Builder allTypeHousesSquareMeters = DoubleStream.builder();
+    private List<House> houseList;
+    private List<Villa> villaList;
+    private List<SummerHouse> summerHouseList;
 
     public HouseTypeServiceImpl() {
         this.houseTypesList = new HouseTypesListImpl();
+        this.houseList = this.houseTypesList.getHouseList();
+        this.villaList = this.houseTypesList.getVillaList();
+        this.summerHouseList = this.houseTypesList.getSummerHouseList();
     }
 
     @Override
     public BigDecimal getTotalPriceOfHouses() {
-        List<House> houseList = this.houseTypesList.getHouseList();
         BigDecimal totalPriceOfHouse = houseList.stream().map(v->v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
         allTypeHousesPriceCount.add(totalPriceOfHouse);
         return totalPriceOfHouse;
@@ -31,7 +38,6 @@ public class HouseTypeServiceImpl implements HouseTypeService {
 
     @Override
     public BigDecimal getTotalPriceOfVillas() {
-        List<Villa> villaList = this.houseTypesList.getVillaList();
         BigDecimal totalPriceOfVillas = villaList.stream().map(v->v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
         allTypeHousesPriceCount.add(totalPriceOfVillas);
         return totalPriceOfVillas;
@@ -39,7 +45,6 @@ public class HouseTypeServiceImpl implements HouseTypeService {
 
     @Override
     public BigDecimal getTotalPriceOfSummerHouses() {
-        List<SummerHouse> summerHouseList = this.houseTypesList.getSummerHouseList();
         BigDecimal totalPriceOfSummerHouses = summerHouseList.stream().map(v->v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
         allTypeHousesPriceCount.add(totalPriceOfSummerHouses);
         return totalPriceOfSummerHouses;
@@ -52,28 +57,24 @@ public class HouseTypeServiceImpl implements HouseTypeService {
 
     @Override
     public OptionalDouble getAverageSquareMetersOfHouses() {
-        List<House> houseList = this.houseTypesList.getHouseList();
-        OptionalDouble averageSquareMetersOfHouses = OptionalDouble.of(houseList.stream().filter(o -> o.getSquareMeters() > 0)
-                .mapToDouble(o -> o.getSquareMeters()).average().orElse(0));
+        OptionalDouble averageSquareMetersOfHouses = OptionalDouble.of(houseList.stream().filter(h -> h.getSquareMeters() > 0)
+                .mapToDouble(h -> h.getSquareMeters()).average().orElse(0));
         allTypeHousesSquareMeters.add(averageSquareMetersOfHouses.getAsDouble());
-
         return averageSquareMetersOfHouses;
     }
 
     @Override
     public OptionalDouble getAverageSquareMetersOfVillas() {
-        List<Villa> villaList = this.houseTypesList.getVillaList();
-        OptionalDouble averageSquareMetersOfVillas = OptionalDouble.of(villaList.stream().filter(o -> o.getSquareMeters() > 0)
-                .mapToDouble(o -> o.getSquareMeters()).average().orElse(0));
+        OptionalDouble averageSquareMetersOfVillas = OptionalDouble.of(villaList.stream().filter(v -> v.getSquareMeters() > 0)
+                .mapToDouble(v -> v.getSquareMeters()).average().orElse(0));
         allTypeHousesSquareMeters.add(averageSquareMetersOfVillas.getAsDouble());
         return averageSquareMetersOfVillas;
     }
 
     @Override
     public OptionalDouble getAverageSquareMetersOfSummerHouses() {
-        List<SummerHouse> summerHouseList = this.houseTypesList.getSummerHouseList();
-        OptionalDouble averageSquareMetersOfHouses = OptionalDouble.of(summerHouseList.stream().filter(o -> o.getSquareMeters() > 0)
-                .mapToDouble(o -> o.getSquareMeters()).average().orElse(0));
+        OptionalDouble averageSquareMetersOfHouses = OptionalDouble.of(summerHouseList.stream().filter(s -> s.getSquareMeters() > 0)
+                .mapToDouble(s -> s.getSquareMeters()).average().orElse(0));
         allTypeHousesSquareMeters.add(averageSquareMetersOfHouses.getAsDouble());
         return averageSquareMetersOfHouses;
     }
@@ -82,4 +83,22 @@ public class HouseTypeServiceImpl implements HouseTypeService {
     public OptionalDouble getAverageSquareMetersOfAllTypeHouses() {
         return allTypeHousesSquareMeters.build().average();
     }
+
+    @Override
+    public List<Object> getAllTypeHousesFilterForNumberOfRoomsAndHalls(int numberOfRooms, int numberOfHalls) {
+        List<Object> allTypeHousesFilterList = new ArrayList<>();
+        allTypeHousesFilterList.add(houseList.stream().filter(h->h.getNumberOfRooms() == numberOfRooms && h.getNumberOfHalls() == numberOfHalls).collect(Collectors.toList()));
+        allTypeHousesFilterList.add(villaList.stream().filter(h->h.getNumberOfRooms() == numberOfRooms && h.getNumberOfHalls() == numberOfHalls).collect(Collectors.toList()));
+        allTypeHousesFilterList.add(summerHouseList.stream().filter(h->h.getNumberOfRooms() == numberOfRooms && h.getNumberOfHalls() == numberOfHalls).collect(Collectors.toList()));
+
+        for(Object filter: allTypeHousesFilterList){
+            System.out.println(filter);
+        }
+
+        return allTypeHousesFilterList;
+
+
+    }
+
+
 }
