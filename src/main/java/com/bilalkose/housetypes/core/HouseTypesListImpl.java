@@ -12,31 +12,39 @@ public class HouseTypesListImpl implements HouseTypesList {
 
     @Override
     public List<House> getHouseList() {
-        House h1 = new House(BigDecimal.valueOf(100),3,1, 200);
-        House h2 = new House(BigDecimal.valueOf(200),4,2,250);
-        House h3 = new House(BigDecimal.valueOf(300),5,3,255);
+        House house1 = new House(BigDecimal.valueOf(100),3,1, 120);
+        House house2 = new House(BigDecimal.valueOf(500),4,2,190);
+        House house3 = new House(BigDecimal.valueOf(950),5,3,250);
         List<House> houseList = new ArrayList<>();
-        houseList.add(h1); houseList.add(h2); houseList.add(h3);
+        houseList.add(house1);
+        houseList.add(house2);
+        houseList.add(house3);
         return houseList;
     }
 
     @Override
     public List<Villa> getVillaList() {
-        Villa v1 = new Villa(BigDecimal.valueOf(100),3,1, 100);
-        Villa v2 = new Villa(BigDecimal.valueOf(200),4,2,100);
-        Villa v3 = new Villa(BigDecimal.valueOf(300),5,3,150);
+        Villa villa1 = new Villa(BigDecimal.valueOf(500),5,1, 200);
+        Villa villa2 = new Villa(BigDecimal.valueOf(1100),6,2,300);
+        Villa villa3 = new Villa(BigDecimal.valueOf(2500),7,3,550);
         List<Villa> villaList = new ArrayList<>();
-        villaList.add(v1); villaList.add(v2); villaList.add(v3);
+        villaList.add(villa1);
+        villaList.add(villa2);
+        villaList.add(villa3);
         return villaList;
     }
 
     @Override
     public List<SummerHouse> getSummerHouseList() {
-        SummerHouse sh1 = new SummerHouse(BigDecimal.valueOf(100),3,1, 100);
-        SummerHouse sh2 = new SummerHouse(BigDecimal.valueOf(200),4,2,200);
-        SummerHouse sh3 = new SummerHouse(BigDecimal.valueOf(300),5,3,300);
+        SummerHouse summerHouse1 = new SummerHouse(BigDecimal.valueOf(750),2,1, 95);
+        SummerHouse summerHouse2 = new SummerHouse(BigDecimal.valueOf(1850),5,2,220);
+        SummerHouse summerHouse3 = new SummerHouse(BigDecimal.valueOf(4250),8,3,650);
+        SummerHouse summerHouse4 = new SummerHouse(BigDecimal.valueOf(4250),3,1,120);
         List<SummerHouse> summerHouseList = new ArrayList<>();
-        summerHouseList.add(sh1); summerHouseList.add(sh2); summerHouseList.add(sh3);
+        summerHouseList.add(summerHouse1);
+        summerHouseList.add(summerHouse2);
+        summerHouseList.add(summerHouse3);
+        summerHouseList.add(summerHouse4);
         return summerHouseList;
     }
 }

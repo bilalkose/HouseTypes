@@ -48,10 +48,10 @@ public class SummerHouse {
 
     @Override
     public String toString() {
-        return "House Type: " + "SummerHouse. "
+        return "[House Type: " + "SummerHouse, "
                 + "Number of Rooms: " + this.numberOfRooms
-                + " Number of Halls: " + this.numberOfHalls
-                + " Price: " + this.price
-                + " Square Meters: " + this.squareMeters;
+                + ", Number of Halls: " + this.numberOfHalls
+                + ", Price: " + this.price
+                + ", Square Meters: " + this.squareMeters + "]";
     }
 }

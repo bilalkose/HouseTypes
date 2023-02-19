@@ -5,14 +5,39 @@ public class Main {
 
     public static void main(String[] args) {
         HouseTypeServiceImpl houseTypeServiceImpl = new HouseTypeServiceImpl();
-        // System.out.println(houseTypeServiceImpl.getTotalPriceOfVillas()); // test
+        System.out.println("***** Total Price Of Houses");
+        System.out.println(houseTypeServiceImpl.getTotalPriceOfHouses());
+        System.out.println("****************************************");
 
-//        System.out.println(houseTypeServiceImpl.getAverageSquareMetersOfHouses()); // 235
-//        System.out.println(houseTypeServiceImpl.getAverageSquareMetersOfVillas()); // 116.6
-//        System.out.println(houseTypeServiceImpl.getAverageSquareMetersOfSummerHouses()); // 200
-//
-//        System.out.println(houseTypeServiceImpl.getAverageSquareMetersOfAllTypeHouses()); // 183,8
+        System.out.println("***** Total Price Of Villas");
+        System.out.println(houseTypeServiceImpl.getTotalPriceOfVillas());
+        System.out.println("****************************************");
 
+        System.out.println("***** Total Price Of Summer Houses");
+        System.out.println(houseTypeServiceImpl.getTotalPriceOfSummerHouses());
+        System.out.println("****************************************");
+
+        System.out.println("***** Total Price Of All Type Houses");
+        System.out.println(houseTypeServiceImpl.getTotalPriceOfAllTypeHouses());
+        System.out.println("****************************************");
+
+        System.out.println("***** Average Square Of Houses");
+        System.out.println(houseTypeServiceImpl.getAverageSquareMetersOfHouses().getAsDouble());
+        System.out.println("****************************************");
+
+        System.out.println("***** Average Square Of Villas");
+        System.out.println(houseTypeServiceImpl.getAverageSquareMetersOfVillas().getAsDouble());
+        System.out.println("****************************************");
+
+        System.out.println("***** Average Square Of Summer Houses");
+        System.out.println(houseTypeServiceImpl.getAverageSquareMetersOfSummerHouses().getAsDouble());
+        System.out.println("****************************************");
+
+        System.out.println("***** Average Square Of All Type Houses");
+        System.out.println(houseTypeServiceImpl.getAverageSquareMetersOfAllTypeHouses().getAsDouble());
+        System.out.println("****************************************");
+
+        System.out.println("***** All Type Houses of 'Number Of Rooms' and 'Number Of Halls'");
         houseTypeServiceImpl.getAllTypeHousesFilterForNumberOfRoomsAndHalls(3,1);
     }
 }

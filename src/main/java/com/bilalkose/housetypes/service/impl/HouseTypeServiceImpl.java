@@ -11,16 +11,15 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
-import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
 public class HouseTypeServiceImpl implements HouseTypeService {
     private HouseTypesList houseTypesList;
-    private static BigDecimal allTypeHousesPriceCount = BigDecimal.valueOf(0);
+    private static Integer allTypeHousesPriceCount = 0;
     private static DoubleStream.Builder allTypeHousesSquareMeters = DoubleStream.builder();
-    private List<House> houseList;
-    private List<Villa> villaList;
-    private List<SummerHouse> summerHouseList;
+    private final List<House> houseList;
+    private final List<Villa> villaList;
+    private final List<SummerHouse> summerHouseList;
 
     public HouseTypeServiceImpl() {
         this.houseTypesList = new HouseTypesListImpl();
@@ -31,27 +30,27 @@ public class HouseTypeServiceImpl implements HouseTypeService {
 
     @Override
     public BigDecimal getTotalPriceOfHouses() {
-        BigDecimal totalPriceOfHouse = houseList.stream().map(v->v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
-        allTypeHousesPriceCount.add(totalPriceOfHouse);
+        BigDecimal totalPriceOfHouse = houseList.stream().map(v -> v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
+        allTypeHousesPriceCount += totalPriceOfHouse.intValue();
         return totalPriceOfHouse;
     }
 
     @Override
     public BigDecimal getTotalPriceOfVillas() {
-        BigDecimal totalPriceOfVillas = villaList.stream().map(v->v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
-        allTypeHousesPriceCount.add(totalPriceOfVillas);
+        BigDecimal totalPriceOfVillas = villaList.stream().map(v -> v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
+        allTypeHousesPriceCount += totalPriceOfVillas.intValue();
         return totalPriceOfVillas;
     }
 
     @Override
     public BigDecimal getTotalPriceOfSummerHouses() {
-        BigDecimal totalPriceOfSummerHouses = summerHouseList.stream().map(v->v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
-        allTypeHousesPriceCount.add(totalPriceOfSummerHouses);
+        BigDecimal totalPriceOfSummerHouses = summerHouseList.stream().map(v -> v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
+        allTypeHousesPriceCount += totalPriceOfSummerHouses.intValue();
         return totalPriceOfSummerHouses;
     }
 
     @Override
-    public BigDecimal getTotalPriceOfAllTypeHouses() {
+    public Integer getTotalPriceOfAllTypeHouses() {
         return allTypeHousesPriceCount;
     }
 
@@ -85,20 +84,15 @@ public class HouseTypeServiceImpl implements HouseTypeService {
     }
 
     @Override
-    public List<Object> getAllTypeHousesFilterForNumberOfRoomsAndHalls(int numberOfRooms, int numberOfHalls) {
+    public void getAllTypeHousesFilterForNumberOfRoomsAndHalls(int numberOfRooms, int numberOfHalls) {
         List<Object> allTypeHousesFilterList = new ArrayList<>();
-        allTypeHousesFilterList.add(houseList.stream().filter(h->h.getNumberOfRooms() == numberOfRooms && h.getNumberOfHalls() == numberOfHalls).collect(Collectors.toList()));
-        allTypeHousesFilterList.add(villaList.stream().filter(h->h.getNumberOfRooms() == numberOfRooms && h.getNumberOfHalls() == numberOfHalls).collect(Collectors.toList()));
-        allTypeHousesFilterList.add(summerHouseList.stream().filter(h->h.getNumberOfRooms() == numberOfRooms && h.getNumberOfHalls() == numberOfHalls).collect(Collectors.toList()));
+        // ret unused, otherwise it doesn't compile
+        boolean ret = allTypeHousesFilterList.addAll(houseList.stream().filter(h -> h.getNumberOfRooms() == numberOfRooms && h.getNumberOfHalls() == numberOfHalls).toList());
+        ret = allTypeHousesFilterList.addAll(villaList.stream().filter(v -> v.getNumberOfRooms() == numberOfRooms && v.getNumberOfHalls() == numberOfHalls).toList());
+        ret = allTypeHousesFilterList.addAll(summerHouseList.stream().filter(s -> s.getNumberOfRooms() == numberOfRooms && s.getNumberOfHalls() == numberOfHalls).toList());
 
-        for(Object filter: allTypeHousesFilterList){
+        for (Object filter : allTypeHousesFilterList) {
             System.out.println(filter);
         }
-
-        return allTypeHousesFilterList;
-
-
     }
-
-
 }
