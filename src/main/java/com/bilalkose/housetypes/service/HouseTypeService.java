@@ -4,29 +4,30 @@ import java.math.BigDecimal;
 import java.util.OptionalDouble;
 
 public interface HouseTypeService {
-    // Evlerin toplam fiyatlarını dönen bir metot
+    // This method returns the total prices of the Houses
     BigDecimal getTotalPriceOfHouses();
 
-    // Villaların toplam fiyatlarını dönen bir metot
+    // This method returns the total prices of the Villas
     BigDecimal getTotalPriceOfVillas();
 
-    // Yazlıkların toplam fiyatlarını dönen metot
+    // This method returns the total prices of the Summer Houses
     BigDecimal getTotalPriceOfSummerHouses();
 
-    // Tüm tipteki evlerin toplam fiyatını dönen metot
+    // This method returns the total prices of All Type Houses
     Integer getTotalPriceOfAllTypeHouses();
 
-    // Evlerin ortalama metrekaresini dönen bir metot
+    // This method returns the average square meters of the Houses
     OptionalDouble  getAverageSquareMetersOfHouses();
 
-    // Villaların ortalama metrekaresini dönen bir metot
+    // This method returns the average square meters of the Villas
     OptionalDouble  getAverageSquareMetersOfVillas();
 
-    // Yazlıkların ortalama metrekaresini dönen metot
+    // This method returns the average square meters of the Summer Houses
     OptionalDouble  getAverageSquareMetersOfSummerHouses();
 
-    // Tüm tipteki evlerin ortalama metrekaresini dönen metot
+    // This method returns the average square meters of All Type Houses
     OptionalDouble  getAverageSquareMetersOfAllTypeHouses();
 
+    // This method returns the filter for number of rooms and halls
     void getAllTypeHousesFilterForNumberOfRoomsAndHalls(int numberOfRooms, int numberOfHalls);
 }

@@ -30,22 +30,22 @@ public class HouseTypeServiceImpl implements HouseTypeService {
 
     @Override
     public BigDecimal getTotalPriceOfHouses() {
-        BigDecimal totalPriceOfHouse = houseList.stream().map(v -> v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
-        allTypeHousesPriceCount += totalPriceOfHouse.intValue();
+        BigDecimal totalPriceOfHouse = houseList.stream().map(v -> v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add); // All the total prices in the houses are collected inside with stream
+        allTypeHousesPriceCount += totalPriceOfHouse.intValue(); // Incrementing value of class specific variable allTypeHousesPriceCount
         return totalPriceOfHouse;
     }
 
     @Override
     public BigDecimal getTotalPriceOfVillas() {
-        BigDecimal totalPriceOfVillas = villaList.stream().map(v -> v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
-        allTypeHousesPriceCount += totalPriceOfVillas.intValue();
+        BigDecimal totalPriceOfVillas = villaList.stream().map(v -> v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add); // All the total prices in the villas are collected inside with stream
+        allTypeHousesPriceCount += totalPriceOfVillas.intValue(); // Incrementing value of class specific variable allTypeHousesPriceCount
         return totalPriceOfVillas;
     }
 
     @Override
     public BigDecimal getTotalPriceOfSummerHouses() {
-        BigDecimal totalPriceOfSummerHouses = summerHouseList.stream().map(v -> v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
-        allTypeHousesPriceCount += totalPriceOfSummerHouses.intValue();
+        BigDecimal totalPriceOfSummerHouses = summerHouseList.stream().map(v -> v.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add); // All the total prices in the summer houses are collected inside with stream
+        allTypeHousesPriceCount += totalPriceOfSummerHouses.intValue(); // Incrementing value of class specific variable allTypeHousesPriceCount
         return totalPriceOfSummerHouses;
     }
 
@@ -57,24 +57,24 @@ public class HouseTypeServiceImpl implements HouseTypeService {
     @Override
     public OptionalDouble getAverageSquareMetersOfHouses() {
         OptionalDouble averageSquareMetersOfHouses = OptionalDouble.of(houseList.stream().filter(h -> h.getSquareMeters() > 0)
-                .mapToDouble(h -> h.getSquareMeters()).average().orElse(0));
-        allTypeHousesSquareMeters.add(averageSquareMetersOfHouses.getAsDouble());
+                .mapToDouble(h -> h.getSquareMeters()).average().orElse(0));  // All the square meters in the houses are collected inside with stream
+        allTypeHousesSquareMeters.add(averageSquareMetersOfHouses.getAsDouble()); // Incrementing value of class specific variable allTypeHousesSquareMeters
         return averageSquareMetersOfHouses;
     }
 
     @Override
     public OptionalDouble getAverageSquareMetersOfVillas() {
         OptionalDouble averageSquareMetersOfVillas = OptionalDouble.of(villaList.stream().filter(v -> v.getSquareMeters() > 0)
-                .mapToDouble(v -> v.getSquareMeters()).average().orElse(0));
-        allTypeHousesSquareMeters.add(averageSquareMetersOfVillas.getAsDouble());
+                .mapToDouble(v -> v.getSquareMeters()).average().orElse(0)); // All the square meters in the villas are collected inside with stream
+        allTypeHousesSquareMeters.add(averageSquareMetersOfVillas.getAsDouble()); // Incrementing value of class specific variable allTypeHousesSquareMeters
         return averageSquareMetersOfVillas;
     }
 
     @Override
     public OptionalDouble getAverageSquareMetersOfSummerHouses() {
         OptionalDouble averageSquareMetersOfHouses = OptionalDouble.of(summerHouseList.stream().filter(s -> s.getSquareMeters() > 0)
-                .mapToDouble(s -> s.getSquareMeters()).average().orElse(0));
-        allTypeHousesSquareMeters.add(averageSquareMetersOfHouses.getAsDouble());
+                .mapToDouble(s -> s.getSquareMeters()).average().orElse(0)); // All the square meters in the summer houses are collected inside with stream
+        allTypeHousesSquareMeters.add(averageSquareMetersOfHouses.getAsDouble()); // Incrementing value of class specific variable allTypeHousesSquareMeters
         return averageSquareMetersOfHouses;
     }
 
@@ -87,9 +87,9 @@ public class HouseTypeServiceImpl implements HouseTypeService {
     public void getAllTypeHousesFilterForNumberOfRoomsAndHalls(int numberOfRooms, int numberOfHalls) {
         List<Object> allTypeHousesFilterList = new ArrayList<>();
         // ret unused, otherwise it doesn't compile
-        boolean ret = allTypeHousesFilterList.addAll(houseList.stream().filter(h -> h.getNumberOfRooms() == numberOfRooms && h.getNumberOfHalls() == numberOfHalls).toList());
-        ret = allTypeHousesFilterList.addAll(villaList.stream().filter(v -> v.getNumberOfRooms() == numberOfRooms && v.getNumberOfHalls() == numberOfHalls).toList());
-        ret = allTypeHousesFilterList.addAll(summerHouseList.stream().filter(s -> s.getNumberOfRooms() == numberOfRooms && s.getNumberOfHalls() == numberOfHalls).toList());
+        boolean ret = allTypeHousesFilterList.addAll(houseList.stream().filter(h -> h.getNumberOfRooms() == numberOfRooms && h.getNumberOfHalls() == numberOfHalls).toList()); // Filter by parameters with stream
+        ret = allTypeHousesFilterList.addAll(villaList.stream().filter(v -> v.getNumberOfRooms() == numberOfRooms && v.getNumberOfHalls() == numberOfHalls).toList()); // Filter by parameters with stream
+        ret = allTypeHousesFilterList.addAll(summerHouseList.stream().filter(s -> s.getNumberOfRooms() == numberOfRooms && s.getNumberOfHalls() == numberOfHalls).toList()); // Filter by parameters with stream
 
         for (Object filter : allTypeHousesFilterList) {
             System.out.println(filter);
